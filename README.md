@@ -1,12 +1,13 @@
 # The_first_in_the_Maze
 
-3D game.
+                                                                                                                                                                 .3D game
 <br />
 תחרות בין שני שחקנים מי יוצא הכי מהר מהמבוך, כאשר לשחקנים יש השפעה אחד על השני והם יכולים לחסום דרכים שיפגעו ביריב, להאט אותו ולטמון בורות/מלכודות ועוד.
+<br />
 המשחק מיועד למשחק דרך האינטרנט עם מחשב.
 <br />
 משחק שמתאים לכל הגילאים ועם הרבה חשיבה ואסטרטגיה.
  <br />
- פירוט נוסף אפשר לראות בדף הWiki : https://github.com/GameDevelopment-Daniel/The_first_in_the_Maze/wiki
+ פירוט נוסף אפשר לראות בדף ה Wiki , קישור לדף : https://github.com/GameDevelopment-Daniel/The_first_in_the_Maze/wiki
  
  
