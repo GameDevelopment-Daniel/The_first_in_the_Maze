@@ -1,6 +1,6 @@
 
-# The first in the Maze  
-        
+# The first in the Maze
+
 <div dir='rtl' lang='he'>
 
 <br />
@@ -19,4 +19,3 @@
 To play the game click [here](https://daniel-zaken.itch.io/the-first-in-the-maze).
 <br />
 More information about the game can be seen here [Wiki](https://github.com/GameDevelopment-Daniel/The_first_in_the_Maze/wiki).
-                      
