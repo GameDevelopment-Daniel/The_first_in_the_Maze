@@ -18,6 +18,8 @@ public class move_player : MonoBehaviour
     [SerializeField] int speed;
     [SerializeField] int width;
 
+    Rigidbody rb;
+
 
     public void OnEnable()
     {
@@ -36,6 +38,8 @@ public class move_player : MonoBehaviour
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
+
         transform.position = new Vector3((width/3)*10 +5 , 0,0);
     }
 
@@ -44,19 +48,19 @@ public class move_player : MonoBehaviour
     {
         if (left.IsPressed())
         {
-            transform.position += new Vector3(Time.deltaTime * speed * -1, 0, 0);
+            rb.velocity= new Vector3(speed * -1, 0, 0);
         }
         if (right.IsPressed())
         {
-            transform.position += new Vector3(Time.deltaTime * speed, 0, 0);
+            rb.velocity = new Vector3(speed, 0, 0);
         }
         if (down.IsPressed())
         {
-            transform.position += new Vector3(0,0,Time.deltaTime * speed * -1);
+            rb.velocity = new Vector3(0,0,speed * -1);
         }
         if (up.IsPressed())
         {
-            transform.position += new Vector3(0,0,Time.deltaTime * speed);
+            rb.velocity = new Vector3(0,0,speed);
         }
     }
 }
