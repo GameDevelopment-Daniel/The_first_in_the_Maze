@@ -47,4 +47,4 @@ jobs:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VALIDATE_SRC_PATH: "Assets/Scripts/**/*.cs"
+          VALIDATE_SRC_PATH: "Assets/Scripts/*.cs"
