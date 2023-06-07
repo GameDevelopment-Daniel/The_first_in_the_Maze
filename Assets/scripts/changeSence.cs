@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class changeSence : MonoBehaviour
 {
     public void Game1player()
     {
         Debug.Log("whattt");
-        SceneManager.LoadScene("MazeScene");
+        SceneManager.LoadScene("Maze1");
     }
     
     public void Abilities()
@@ -16,7 +17,17 @@ public class changeSence : MonoBehaviour
         SceneManager.LoadScene("Abilities");
     }
     public void Game2player()
-    {
-       // SceneManager.LoadScene("MazeScene");
+    { 
+       SceneManager.LoadScene("Menu");
     }
+    public void openWindowSence()
+    {
+        SceneManager.LoadScene("openWindowSence");
+    }
+    public void openWindowSence_disconnect()
+    {
+        PhotonNetwork.Disconnect();
+        SceneManager.LoadScene("openWindowSence");
+    }
+
 }

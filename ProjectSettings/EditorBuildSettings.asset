@@ -6,12 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/openWindowSence.unity
-    guid: 7db213b62bd7f504b823b96cd6258ff6
+    path: Assets/Scence/openWindowSence.unity
+    guid: 4fc42df7b92f9a8498c4638e23dc3712
   - enabled: 1
-    path: Assets/Scenes/Abilities.unity
-    guid: d2a0e98f54eb5a646a135d98c62db7d1
+    path: Assets/Menu/Menu.unity
+    guid: 686d4a47c24a16e48bc760923c947601
   - enabled: 1
-    path: Assets/Scenes/MazeScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Game/Game.unity
+    guid: 6e150aac8c7e7534aa913a77fe9be0ad
+  - enabled: 1
+    path: Assets/Scence/Abilities.unity
+    guid: 132d089e808b5ea4bbe0818dfe8d0940
+  - enabled: 1
+    path: Assets/Scence/Maze2.unity
+    guid: f48866c78de877440988d80e06b0500f
+  - enabled: 1
+    path: Assets/Scence/Maze1.unity
+    guid: 1d0c3da1a343e304a995d7b9946732a9
   m_configObjects: {}
