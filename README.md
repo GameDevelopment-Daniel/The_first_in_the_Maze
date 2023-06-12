@@ -24,4 +24,4 @@ To play the game click [here](https://daniel-zaken.itch.io/the-first-in-the-maze
 <br />
 More information about the game can be seen here [Wiki](https://github.com/GameDevelopment-Daniel/The_first_in_the_Maze/wiki).
 </br>
-In my game I use [this GitHub](https://github.com/TaylorAbraham/Unity-Photon-Multiplayer-Base) for creating the looby.
+In my game I used [this GitHub](https://github.com/TaylorAbraham/Unity-Photon-Multiplayer-Base) for creating the looby.
