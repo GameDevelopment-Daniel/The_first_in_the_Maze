@@ -18,9 +18,10 @@
 יצירת המבוך ב 3D על ידי שימוש באלגוריתם kruskal לאיחוד קבוצות, ויצירת שני פתחים לכניסה לשני השחקנים משני מקומות שונים של המבוך.באלגוריתם היה שימוש ברנדומליות ולכן המבוך הוא רנדומלי וכל פעם יווצר מבוך שונה ! דבר שיוסיף מאוד למשחק.
 </br>
 בנוסף מומש יצירת שחקן בסיסי בדמות כדור ואפשרות לנועה איתו במבוך באמצעות החיצים.
-</br>
-In my game I use [this github](https://github.com/TaylorAbraham/Unity-Photon-Multiplayer-Base) for creating the looby/rooms.
-</br>
+
+</br></br>
 To play the game click [here](https://daniel-zaken.itch.io/the-first-in-the-maze-multiplayer).
 <br />
 More information about the game can be seen here [Wiki](https://github.com/GameDevelopment-Daniel/The_first_in_the_Maze/wiki).
+</br>
+In my game I use [this github](https://github.com/TaylorAbraham/Unity-Photon-Multiplayer-Base) for creating the looby/rooms.
