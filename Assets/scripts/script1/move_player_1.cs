@@ -166,7 +166,7 @@ public class move_player_1 : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if(collision.gameObject.tag == "wall"&& breakWallNow ) // for me: need to made diffrent tag for framw
         {

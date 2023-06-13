@@ -29,7 +29,7 @@ public class Launcher : MonoBehaviourPunCallbacks {
     Debug.Log("Connecting to master...");
     PhotonNetwork.ConnectUsingSettings();
   }
-    private void FixedUpdate()
+    /*private void FixedUpdate()
     {
         if (PhotonNetwork.InRoom)
         {
@@ -42,7 +42,7 @@ public class Launcher : MonoBehaviourPunCallbacks {
                 PhotonNetwork.CurrentRoom.IsVisible = true;
             }
         }
-    }
+    }*/
 
     public override void OnConnectedToMaster() {
     Debug.Log("Connected to master!");
@@ -146,6 +146,8 @@ public class Launcher : MonoBehaviourPunCallbacks {
       }
       Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
     }
+
+
   }
 
   public override void OnCreateRoomFailed(short returnCode, string message) {
@@ -175,5 +177,6 @@ public class Launcher : MonoBehaviourPunCallbacks {
     PhotonNetwork.Disconnect();
     SceneManager.LoadScene("openWindowSence");
     }
+
 }
 

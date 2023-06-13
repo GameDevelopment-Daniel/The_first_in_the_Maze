@@ -217,7 +217,7 @@ public class move_player_2 : MonoBehaviourPun
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
 
         if (view.IsMine)
