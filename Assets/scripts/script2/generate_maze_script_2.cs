@@ -143,8 +143,8 @@ public class generate_maze_script_2 : MonoBehaviourPun
         //newFloor.transform.localScale=new Vector3(newFloor.transform.localScale.x*width, newFloor.transform.localScale.y, newFloor.transform.localScale.z*length);
 
         //add the first linw of walls
-        int firstEntry = width / 3;      // position for player 1 entry
-        int secondEntry = width - firstEntry; // position for player 2 entry
+        int firstEntry = (width-1) / 2 - 2 ;      // position for player 1 entry
+        int secondEntry = (width-1) / 2 + 2; // position for player 2 entry
         for (int i = 0; i < width-1; i++)
         {
             if (i == firstEntry || i == secondEntry) continue;

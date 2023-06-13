@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using TMPro;
+
 
 public class move_player_1 : MonoBehaviour
 {
@@ -32,6 +34,12 @@ public class move_player_1 : MonoBehaviour
     GameObject reMazeRed;
 
     bool breakWallNow= false;
+
+    public GameObject miniCamera;
+    
+
+    [SerializeField] AudioSource win_sound;
+    [SerializeField] AudioSource bip_sound;
 
     public void OnEnable()
     {
@@ -100,50 +108,61 @@ public class move_player_1 : MonoBehaviour
         }
         rb.velocity = transform.TransformDirection(direction) * speed;
 
+        miniCamera.transform.position = new Vector3(miniCamera.transform.position.x, miniCamera.transform.position.y, transform.position.z);
+        
     }
 
     private void OnTriggerEnter(Collider collision)
     {
 
-        if (collision.name == "freeze") //got to the ice cube
+        if (collision.name == "freeze_ability") //got to the ice cube
         {
+            bip_sound.Play();
             Destroy(collision.gameObject);
             freezeRed.GetComponent<Image>().enabled = false; 
 
         }
-        if (collision.name == "slow") //got to the turtle
+        if (collision.name == "slow_ability") //got to the turtle
         {
+            bip_sound.Play();
             Destroy(collision.gameObject);
             slowRed.GetComponent<Image>().enabled = false;
 
         }
-        if (collision.name == "lightning") //got to the lightning
+        if (collision.name == "lightning_ability") //got to the lightning
         {
+            bip_sound.Play();
             Destroy(collision.gameObject);
             fastRed.GetComponent<Image>().enabled = false;
 
         }
-        if (collision.name == "break") //got to the hamer
+        if (collision.name == "break_ability") //got to the hamer
         {
+            bip_sound.Play();
             Destroy(collision.gameObject);
             breakRed.GetComponent<Image>().enabled = false;
 
         }
-        if (collision.name == "reMaze") //got to the maze
+        if (collision.name == "reMaze_ability") //got to the maze
         {
-            Debug.Log("why");
+            bip_sound.Play();
             Destroy(collision.gameObject);
             reMazeRed.GetComponent<Image>().enabled = false;
 
         }
-        Debug.Log(collision.name);
 
         if (collision.name == "finishLine") //the player got to the finish line and won
         {
-           // GameObject.Find("win").SetActive(true);
-           // GameObject.Find("menu").SetActive(true);
+            Debug.Log(collision.name);
+            GameObject.Find("win").GetComponent<Image>().enabled = true;
+            //GameObject menu = GameObject.Find("menu");
+            //menu.GetComponent<Image>().enabled = true;
+            //menu.GetComponent<Button>().enabled = true;
+            //GameObject.Find("text").GetComponent<TextMeshProUGUI>().enabled = true;
+            win_sound.Play();
+
             this.gameObject.GetComponent<move_player_1>().enabled = false;
-            this.gameObject.GetComponent<active_abilities_1>().enabled = false;
+            GameObject.Find("Abilities").GetComponent<active_abilities_1>().enabled = false;
         }
     }
 

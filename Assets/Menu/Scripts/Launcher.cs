@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using Photon.Realtime;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class Launcher : MonoBehaviourPunCallbacks {
   public static Launcher Instance;
@@ -28,8 +29,22 @@ public class Launcher : MonoBehaviourPunCallbacks {
     Debug.Log("Connecting to master...");
     PhotonNetwork.ConnectUsingSettings();
   }
+    private void FixedUpdate()
+    {
+        if (PhotonNetwork.InRoom)
+        {
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+            {
+                PhotonNetwork.CurrentRoom.IsVisible = false;
+            }
+            else
+            {
+                PhotonNetwork.CurrentRoom.IsVisible = true;
+            }
+        }
+    }
 
-  public override void OnConnectedToMaster() {
+    public override void OnConnectedToMaster() {
     Debug.Log("Connected to master!");
     PhotonNetwork.JoinLobby();
     // Automatically load scene for all clients when the host loads a scene
@@ -61,7 +76,8 @@ public class Launcher : MonoBehaviourPunCallbacks {
 
   public void CreateRoom() {
     if (!string.IsNullOrEmpty(roomNameInputField.text)) {
-      PhotonNetwork.CreateRoom(roomNameInputField.text, new RoomOptions() { CleanupCacheOnLeave = false });
+    
+      PhotonNetwork.CreateRoom(roomNameInputField.text, new RoomOptions() {MaxPlayers = 2, CleanupCacheOnLeave = false, IsVisible = true });
       MenuManager.Instance.OpenMenu("loading");
       roomNameInputField.text = "";
     } else {
@@ -75,7 +91,12 @@ public class Launcher : MonoBehaviourPunCallbacks {
     MenuManager.Instance.OpenMenu("room");
     roomNameText.text = PhotonNetwork.CurrentRoom.Name;
     Player[] players = PhotonNetwork.PlayerList;
-    foreach (Transform trans in playerListContent) {
+    if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+    {
+        Debug.Log("got 2 players in the same room");
+        //PhotonNetwork.CurrentRoom.IsVisible = false;
+    }
+        foreach (Transform trans in playerListContent) {
       Destroy(trans.gameObject);
     }
     for (int i = 0; i < players.Count(); i++) {
@@ -90,8 +111,17 @@ public class Launcher : MonoBehaviourPunCallbacks {
   }
 
   public void LeaveRoom() {
-    PhotonNetwork.LeaveRoom();
-    MenuManager.Instance.OpenMenu("loading");
+        Debug.Log("click on leave room");
+        Debug.Log("current room visible is: "+ PhotonNetwork.CurrentRoom.IsVisible);
+        
+        //PhotonNetwork.CurrentRoom.IsVisible = true;
+        
+        Debug.Log("current room visible after is: " + PhotonNetwork.CurrentRoom.IsVisible);
+        PhotonNetwork.LeaveRoom();
+
+       // MenuManager.Instance.OpenMenu("loading");
+        
+        PhotonNetwork.Disconnect();
   }
 
   public void JoinRoom(RoomInfo info) {
@@ -100,10 +130,12 @@ public class Launcher : MonoBehaviourPunCallbacks {
   }
 
   public override void OnLeftRoom() {
-    MenuManager.Instance.OpenMenu("title");
-  }
+        SceneManager.LoadScene("Menu");
+        Debug.Log("was on left room");
+    }
 
   public override void OnRoomListUpdate(List<RoomInfo> roomList) {
+        
     foreach (Transform trans in roomListContent) {
       Destroy(trans.gameObject);
     }
@@ -130,10 +162,18 @@ public class Launcher : MonoBehaviourPunCallbacks {
         // Use this instead of scene management so that *everyone* in the lobby goes into this scene
 
         // Changing the nickname of the master client in PUN
-        PhotonNetwork.LoadLevel(4);
-  }
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 2) 
+        {
+            PhotonNetwork.CurrentRoom.IsVisible= false;
+            PhotonNetwork.LoadLevel(4);
+        }
+    }
 
   public void QuitGame() {
-    Application.Quit();
-  }
+    //Application.Quit();
+    
+    PhotonNetwork.Disconnect();
+    SceneManager.LoadScene("openWindowSence");
+    }
 }
+

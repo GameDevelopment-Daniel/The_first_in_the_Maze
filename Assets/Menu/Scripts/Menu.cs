@@ -1,5 +1,7 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Menu : MonoBehaviour {
@@ -9,8 +11,7 @@ public class Menu : MonoBehaviour {
   private void Start() {
     gameObject.SetActive(open);
   }
-
-  public void Open() {
+    public void Open() {
     open = true;
     gameObject.SetActive(true);
   }
@@ -18,5 +19,5 @@ public class Menu : MonoBehaviour {
   public void Close() {
     open = false;
     gameObject.SetActive(false);
-  }
+    }
 }

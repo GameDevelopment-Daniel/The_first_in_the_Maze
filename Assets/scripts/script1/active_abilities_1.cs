@@ -95,9 +95,9 @@ public class active_abilities_1 : MonoBehaviour
         if (five.WasPressedThisFrame() && reMazeRed.GetComponent<Image>().enabled == false) // for me: dont make more then 2 slow in the game
         {
             reMazeRed.GetComponent<Image>().enabled = true;
-            
-            Maze.GetComponent<generate_maze_script_1>().destroy_maze();
-            Maze.GetComponent<generate_maze_script_1>().Start();
+            GameObject.Find("minimapRaw").GetComponent<RawImage>().enabled = true;
+           // Maze.GetComponent<generate_maze_script_1>().destroy_maze();
+           // Maze.GetComponent<generate_maze_script_1>().Start();
         }
     }
     IEnumerator ResetSpeedAfterDelay(float delay,bool add)

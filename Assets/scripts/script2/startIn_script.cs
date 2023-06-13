@@ -30,9 +30,8 @@ public class startIn_script : MonoBehaviour
         }
         this.gameObject.GetComponent<move_player_2>().enabled = true;
         this.gameObject.GetComponent<active_abilities_2>().enabled = true;
-        //if (view.IsMine)
-        {
-            GameObject.Find("start in").SetActive(false);
-        }
+       
+        GameObject.Find("start in").SetActive(false);
+        
     }
 }

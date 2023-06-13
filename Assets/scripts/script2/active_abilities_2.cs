@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
-
+using TMPro;
 
 public class active_abilities_2 : MonoBehaviourPun
 {
@@ -35,6 +35,9 @@ public class active_abilities_2 : MonoBehaviourPun
     int speedBoost = 8;
     int slowMinus = 6;
     float timeBoost = 10.0f;
+
+    int slow_counter = 0;
+    int freeze_counter = 0;
 
     private void Awake()
     {
@@ -113,7 +116,7 @@ public class active_abilities_2 : MonoBehaviourPun
                 StartCoroutine(slow(timeBoost));
             }
             //for freeze
-            if (three.WasPressedThisFrame() && freezeRed.GetComponent<Image>().enabled == false) // for me: dont make more then 2 slow in the game
+            if (three.WasPressedThisFrame() && freezeRed.GetComponent<Image>().enabled == false) 
             {
                 Debug.Log("update3");
 
@@ -121,7 +124,7 @@ public class active_abilities_2 : MonoBehaviourPun
                 StartCoroutine(freeze(timeBoost/2));
             }
             //for break wall
-            if (four.WasPressedThisFrame() && breakRed.GetComponent<Image>().enabled == false) // for me: dont make more then 2 slow in the game
+            if (four.WasPressedThisFrame() && breakRed.GetComponent<Image>().enabled == false)
             {
                 Debug.Log("update4");
 
@@ -190,40 +193,73 @@ public class active_abilities_2 : MonoBehaviourPun
 
     IEnumerator slow(float delay)
     {
-        Debug.Log("activate slowOther");
+        slow_counter++; //if more then 1 slow active so we need to know for when to disable the text
+
         PhotonView photonView1 = GameObject.Find("player2(Clone)").GetComponent<PhotonView>();
         PhotonView photonView2 = GameObject.Find("player1(Clone)").GetComponent<PhotonView>();
 
         photonView1.RPC("addSpeed", RpcTarget.Others, slowMinus * -1);
         photonView2.RPC("addSpeed", RpcTarget.Others, slowMinus * -1);
 
-        //GetComponent<PhotonView>().RPC("slowRPC", RpcTarget.Others,false);
+        photonView1.RPC("slow_text", RpcTarget.Others, true); // show the enemy he is slowed
+        photonView2.RPC("slow_text", RpcTarget.Others, true);
 
-        yield return new WaitForSeconds(delay);
+
+        yield return new WaitForSeconds(delay); // after this the slow time end
+
+        slow_counter--;
 
         photonView1.RPC("addSpeed", RpcTarget.Others, slowMinus);
         photonView2.RPC("addSpeed", RpcTarget.Others, slowMinus);
 
-        //GetComponent<PhotonView>().RPC("slowRPC", RpcTarget.Others, true);
+        if (slow_counter == 0) //all the slows was over
+        {
+            photonView1.RPC("slow_text", RpcTarget.Others, false);
+            photonView2.RPC("slow_text", RpcTarget.Others, false);
+        }
+
 
     }
     IEnumerator freeze(float delay)
     {
-        Debug.Log("activate slowOther");
+        freeze_counter++;
+
         PhotonView photonView1 = GameObject.Find("player2(Clone)").GetComponent<PhotonView>();
         PhotonView photonView2 = GameObject.Find("player1(Clone)").GetComponent<PhotonView>();
 
         photonView1.RPC("ResetSpeed", RpcTarget.Others);
         photonView2.RPC("ResetSpeed", RpcTarget.Others);
 
+        photonView1.RPC("freeze_text", RpcTarget.Others, true); // show the enemy he is freeze
+        photonView2.RPC("freeze_text", RpcTarget.Others, true);
         //GetComponent<PhotonView>().RPC("slowRPC", RpcTarget.Others,false);
 
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(delay); // after this the freeze end
 
-        photonView1.RPC("base_speed", RpcTarget.Others);
-        photonView2.RPC("base_speed", RpcTarget.Others);
+        freeze_counter--;
 
-        //GetComponent<PhotonView>().RPC("slowRPC", RpcTarget.Others, true);
+        
+
+        if (freeze_counter == 0)
+        {
+            photonView1.RPC("base_speed", RpcTarget.Others);
+            photonView2.RPC("base_speed", RpcTarget.Others);
+            photonView1.RPC("freeze_text", RpcTarget.Others, false);
+            photonView2.RPC("freeze_text", RpcTarget.Others, false);
+        }
+
+    }
+    [PunRPC]
+    public void slow_text(bool active) {
+        GameObject slow_text = GameObject.Find("slow_text");
+        slow_text.GetComponent<TextMeshProUGUI>().enabled = active;
+
+    }
+    [PunRPC]
+    public void freeze_text(bool active)
+    {
+        GameObject freeze_text = GameObject.Find("freeze_text");
+        freeze_text.GetComponent<TextMeshProUGUI>().enabled = active;
 
     }
 

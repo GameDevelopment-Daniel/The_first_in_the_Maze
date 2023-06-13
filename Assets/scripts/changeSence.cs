@@ -27,6 +27,7 @@ public class changeSence : MonoBehaviour
     public void openWindowSence_disconnect()
     {
         PhotonNetwork.Disconnect();
+        
         SceneManager.LoadScene("openWindowSence");
     }
 

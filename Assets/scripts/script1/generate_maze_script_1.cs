@@ -10,7 +10,6 @@ public class generate_maze_script_1 : MonoBehaviourPun
     [SerializeField] GameObject wallVertical;
     //[SerializeField] GameObject floor;
     [SerializeField] int wallLength;
-    [SerializeField] int lvl;
 
     [SerializeField] int length;
     [SerializeField] int width;
@@ -18,7 +17,7 @@ public class generate_maze_script_1 : MonoBehaviourPun
     Vector3 posVertical;
     int [,] mat;
     List<Edge> edges = new List<Edge>();
-    GameObject maze;
+    public GameObject maze;
 
 
     private class Edge
@@ -57,17 +56,14 @@ public class generate_maze_script_1 : MonoBehaviourPun
             for(int j = 0; j < width; j++) 
                 mat[i,j] = i*width+j;
 
-        if (lvl == 1)
-        {maze = GameObject.Find("20x20maze");}
-        else
-        {maze = GameObject.Find("20x30maze");}
-
         generate_maze();
+        Debug.Log("IN START");
     }
     private void generate_maze()
     {
         generate_walls();
         KruskalAlgorithm();
+        Debug.Log("IN generate maze");
     }
     public void destroy_maze()
     {

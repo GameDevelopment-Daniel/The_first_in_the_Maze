@@ -9,9 +9,6 @@ public class spawnPlayers_script_2 : MonoBehaviour
     private bool player1Spawned = false;
     private bool player2Spawned = false;
 
-    public static InputManager Instance;
-    private PlayerControls playerControls;
-
     
     void Awake()
     {
